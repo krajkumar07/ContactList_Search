@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Contact List</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contact List</h1>
+        <div>
+            <input type="text" id="searchInput" placeholder="Search contacts..." oninput="searchContacts()">
+        </div>
+        <div>
+            <input type="text" id="newContactName" placeholder="Enter contact name">
+            <input type="text" id="newContactNumber" placeholder="Enter contact number">
+            <button onclick="insertContact()">Add Contact</button>
+        </div>
+        <div>
+            <input type="text" id="deleteContactName" placeholder="Enter contact name to delete">
+            <button onclick="deleteContact()">Delete Contact</button>
+        </div>
+        <ul id="contactList"></ul>
+    </div>
+
+    <script src="tries.js"></script>
+</body>
+</html>
