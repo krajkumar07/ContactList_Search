@@ -1,28 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contact List</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
     <div class="container">
         <h1>Contact List</h1>
-        <div>
-            <input type="text" id="searchInput" placeholder="Search contacts..." oninput="searchContacts()">
+
+        <!-- Search contacts -->
+        <div class="search-section">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search contacts..."
+                oninput="searchContacts()"
+                aria-label="Search contacts"
+            />
         </div>
-        <div>
-            <input type="text" id="newContactName" placeholder="Enter contact name">
-            <input type="text" id="newContactNumber" placeholder="Enter contact number">
-            <button onclick="insertContact()">Add Contact</button>
-        </div>
-        <div>
-            <input type="text" id="deleteContactName" placeholder="Enter contact name to delete">
-            <button onclick="deleteContact()">Delete Contact</button>
-        </div>
-        <ul id="contactList"></ul>
+
+        <!-- Add new contact -->
+        <form class="add-contact-section" onsubmit="event.preventDefault(); insertContact();">
+            <input
+                type="text"
+                id="newContactName"
+                placeholder="Enter contact name"
+                required
+                aria-label="New contact name"
+            />
+            <input
+                type="text"
+                id="newContactNumber"
+                placeholder="Enter contact number"
+                required
+                aria-label="New contact number"
+                pattern="^[0-9+\-\s()]*$"
+                title="Valid phone numbers only"
+            />
+            <button type="submit">Add Contact</button>
+        </form>
+
+        <!-- Delete contact -->
+        <form class="delete-contact-section" onsubmit="event.preventDefault(); deleteContact();">
+            <input
+                type="text"
+                id="deleteContactName"
+                placeholder="Enter contact name to delete"
+                aria-label="Contact name to delete"
+                required
+            />
+            <button type="submit" class="delete-btn">Delete Contact</button>
+        </form>
+
+        <!-- Contact list display -->
+        <ul id="contactList" aria-live="polite" aria-label="List of contacts"></ul>
     </div>
 
     <script src="tries.js"></script>
