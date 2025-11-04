@@ -1,9 +1,10 @@
+// ...existing code...
 # ContactList_Search
 
 Simple static contact-list web application (HTML, CSS, JS) with search, add and delete features.
 
 ## Features
-- Search contacts as you type
+- Search contacts as you type (prefix search)
 - Add new contact (name + number)
 - Delete contact by name
 - Single-page static app (no server required)
@@ -11,10 +12,25 @@ Simple static contact-list web application (HTML, CSS, JS) with search, add and 
 ## Project structure
 - index.html — main UI
 - styles.css — styles
-- tries.js — app logic (search/insert/delete)
+- tries.js — app logic (search/insert/delete) using a Trie data structure
 - Dockerfile — container image (nginx)
 - Jenkinsfile — example CI pipeline
 - .dockerignore
+
+## Implementation details — Trie (prefix tree)
+This app implements a Trie (prefix tree) in tries.js to store contact names and support fast prefix-based operations:
+- Fast search-as-you-type (returns matches for a given prefix).
+- Insert new contacts by name into the trie.
+- Delete contacts by name from the trie (removes nodes when appropriate).
+
+Performance (per operation, n = length of the name/prefix):
+- Search: O(n)
+- Insert: O(n)
+- Delete: O(n)
+
+Notes:
+- The trie stores contact metadata (e.g., phone number) at terminal nodes.
+- Data is kept in-memory in the browser; reloading the page resets the trie.
 
 ## Prerequisites
 - Docker (for container build/run)
@@ -51,4 +67,4 @@ The included `Jenkinsfile` checks out the repo, builds the Docker image and can 
 ## Notes
 - The app is static — persistent storage is not provided; data resets on page reload.
 - Update `.dockerignore` to exclude files you don't want in the image.
-- For production, consider adding HTTPS, input validation improvements and persistent storage.
+- For production, consider adding HTTPS, server-side storage, and stronger validation.
