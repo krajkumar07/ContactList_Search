@@ -1,53 +1,54 @@
-# Contact List Application
+# ContactList_Search
 
-This is a simple Contact List web application that allows users to manage their contacts by adding, searching, and deleting them.
-
-## Project Structure
-
-```
-ContactList
-├── index.html        # Main HTML document for the application
-├── styles.css        # Styles for the application
-├── tries.js          # JavaScript functionality for managing contacts
-├── Dockerfile        # Instructions to build a Docker image for the application
-├── .dockerignore     # Files and directories to ignore when building the Docker image
-└── README.md         # Documentation for the project
-```
+Simple static contact-list web application (HTML, CSS, JS) with search, add and delete features.
 
 ## Features
+- Search contacts as you type
+- Add new contact (name + number)
+- Delete contact by name
+- Single-page static app (no server required)
 
-- **Search Contacts**: Users can search for contacts by name.
-- **Add Contacts**: Users can add new contacts with a name and phone number.
-- **Delete Contacts**: Users can delete contacts by name.
+## Project structure
+- index.html — main UI
+- styles.css — styles
+- tries.js — app logic (search/insert/delete)
+- Dockerfile — container image (nginx)
+- Jenkinsfile — example CI pipeline
+- .dockerignore
 
-## Getting Started
+## Prerequisites
+- Docker (for container build/run)
+- Optional: Jenkins (for CI)
 
-To run this application locally, follow these steps:
+## Run locally (quick)
+Open `index.html` in your browser or serve with a simple local server.
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd ContactList
-   ```
+PowerShell (from project root):
+```powershell
+# using Python 3
+python -m http.server 8000
+# then open http://localhost:8000 in browser
+```
 
-2. Open `index.html` in your web browser to view the application.
+## Build and run with Docker
+From project root (PowerShell):
+```powershell
+# build image
+docker build -t contactlistsearch:1.0 .
 
-## Running with Docker
+# run container (maps host 8082 -> container 80)
+docker run -d --name contactlistsearch -p 8082:80 contactlistsearch:1.0
 
-To build and run the application using Docker, follow these steps:
+# stop & remove container
+docker stop contactlistsearch
+docker rm contactlistsearch
+```
+Open http://localhost:8082
 
-1. Build the Docker image:
-   ```
-   docker build -t contact-list-app .
-   ```
+## Jenkins pipeline
+The included `Jenkinsfile` checks out the repo, builds the Docker image and can optionally push to a registry. Update `DOCKER_REGISTRY_CREDENTIALS` and image name if pushing to Docker Hub.
 
-2. Run the Docker container:
-   ```
-   docker run -p 8080:80 contact-list-app
-   ```
-
-3. Open your web browser and go to `http://localhost:8080` to access the application.
-
-## License
-
-This project is licensed under the MIT License.
+## Notes
+- The app is static — persistent storage is not provided; data resets on page reload.
+- Update `.dockerignore` to exclude files you don't want in the image.
+- For production, consider adding HTTPS, input validation improvements and persistent storage.
