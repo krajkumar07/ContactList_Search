@@ -39,7 +39,7 @@ pipeline {
                 script {
                     sh 'docker stop contactlistsearch || true'
                     sh 'docker rm contactlistsearch || true'
-                    sh "docker run -d --name contactlistsearch -p 8080:80 ${DOCKER_IMAGE}"
+                    sh "docker run -d --name contactlistsearch -p 8082:80 ${DOCKER_IMAGE}"
                 }
             }
         }
