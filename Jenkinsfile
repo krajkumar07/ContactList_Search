@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-
+/*
         stage('Push Docker Image (Optional)') {
             when {
                 expression { return env.DOCKER_REGISTRY_CREDENTIALS != null }
@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Run Container Locally (Optional)') {
             steps {
                 script {
