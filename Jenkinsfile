@@ -12,6 +12,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/krajkumar07/ContactList_Search.git'
             }
         }
+        stage('Test Docker') {
+            steps {
+                sh 'docker --version'
+                sh 'docker info'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
